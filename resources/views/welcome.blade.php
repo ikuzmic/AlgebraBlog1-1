@@ -64,6 +64,7 @@
         </style>
     </head>
     <body>
+           
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -81,7 +82,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{ "<p>Hello Katarina</p>" }} <!-- escapes html special characters -->
+                    {!! "<p>Hello Katarina</p>" !!} <!-- does not escape html special characters -->
                 </div>
 
                 <div class="links">
