@@ -81,9 +81,12 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    {{ "<p>Hello Katarina</p>" }} <!-- escapes html special characters -->
-                    {!! "<p>Hello Katarina</p>" !!} <!-- does not escape html special characters -->
+                <div class="m-b-md">
+                    @foreach ($posts as $key => $post)
+                        <h2> {{ ++$key }}. Post</h2>;
+                        {{ $post }}
+                    @endforeach                    
+                
                 </div>
 
                 <div class="links">

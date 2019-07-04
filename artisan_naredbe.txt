@@ -1,0 +1,6 @@
+php artisan serve
+php artisan make:migration --create=posts create_posts_table
+php artisan migrate
+php artisan make:auth
+php artisan make:controller PostsController
+php artisan make:model Post
