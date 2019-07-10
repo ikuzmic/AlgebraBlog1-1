@@ -42,3 +42,5 @@ After you start server type http://localhost:8000 to your browser
 ## License
 
 Algebra Blog is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Pozdrav  ;)     Filip Jakov Mišić
