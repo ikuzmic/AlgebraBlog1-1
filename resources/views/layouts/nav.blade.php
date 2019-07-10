@@ -1,6 +1,6 @@
 <div class="blog-masthead">
     <div class="container">
-    <nav class="nav blog-nav">
+    <nav class="nav blog-nav navbar-expand-md navbar-dark">
         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
         <a class="nav-link {{ request()->is('users') ? 'active' : '' }}" href="/users">Users</a>
         <a class="nav-link" href="#">Press</a>

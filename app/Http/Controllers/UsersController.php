@@ -26,7 +26,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -37,7 +37,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|email|max:255|unique:users',
+            'password'  => 'required|min:3|confirmed'
+        ]);
+
+        $user = new User();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = bcrypt($request['password']);
+        $user->save();
+
+        return redirect()->route('users.index')->withFlashMessage('User created successfully');
     }
 
     /**
@@ -48,7 +60,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        //return show.blade.php
     }
 
     /**
@@ -80,8 +92,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        //$user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->withFlashMessage("User $user->name deleted successfully");
     }
 }

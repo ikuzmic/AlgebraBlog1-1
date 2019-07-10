@@ -23,7 +23,7 @@ git config --global user.name "Your Name"
 
 // na githubu create pull request
 
-
-
 za instalirati novo skinuti repozitorij kod sebe lokalno pratite upute iz README.md
 
+Za izlazak iz Vim-a
+:wq! (write,quit)
