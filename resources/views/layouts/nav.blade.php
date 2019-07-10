@@ -1,8 +1,8 @@
 <div class="blog-masthead">
     <div class="container">
     <nav class="nav blog-nav">
-        <a class="nav-link active" href="/">Home</a>
-        <a class="nav-link" href="/users">Users</a>
+        <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
+        <a class="nav-link {{ request()->is('users') ? 'active' : '' }}" href="/users">Users</a>
         <a class="nav-link" href="#">Press</a>
         <a class="nav-link" href="#">New hires</a>
         <a class="nav-link" href="#">About</a>
@@ -29,6 +29,7 @@
                                         document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
+                    <a href="{{ route('posts.create') }}" class="dropdown-item">Dodaj novi post</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

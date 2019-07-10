@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <div class="card mb-5">
-        <div class="card-body">
-            <a href="{{ route('posts.create') }}" class="btn btn-primary">Dodaj novi post</a>
-        </div>
+    <div class="">
+        <a href="{{ route('posts.create') }}" class="btn btn-primary">Dodaj novi post</a>
     </div>
+
+    <hr>
 
     @foreach ($posts as $post)
     <div class="blog-post">
@@ -14,7 +14,7 @@
             <h2 class="blog-post-title">{{ $post->title }}</h2>
         </a>
         <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} <a href="#">Mark</a></p>
-        <section>
+        <section class="blog-body">
             {{ $post->body }}
         </section>
     </div>
