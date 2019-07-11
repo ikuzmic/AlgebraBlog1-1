@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">Kreiraj korisnika</div>
+        <div class="card-header">Uredie korisnika</div>
         <div class="card-body">
 
             <form method="POST" action="{{ route('users.update',$id->id) }}">
