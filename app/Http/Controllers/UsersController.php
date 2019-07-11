@@ -60,7 +60,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //return show.blade.php
+        $id=User::find($id);
+        return view('users.show',compact('id'));
     }
 
     /**
