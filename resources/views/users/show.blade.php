@@ -1,0 +1,24 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>{{ $user->id }}</th>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->created_at }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+@endsection
