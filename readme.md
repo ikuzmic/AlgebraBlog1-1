@@ -1,4 +1,4 @@
-# AlgebraBlog
+# Ivan Kuzmić - AlgebraBlog
 ## The Blogging Application
 
 ## Installation
