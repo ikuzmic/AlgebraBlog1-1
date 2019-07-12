@@ -60,7 +60,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //return show.blade.php
+        $user =User::find($id);
+        return view('users.show',compact('user'));
     }
 
     /**
@@ -71,7 +72,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id=User::find($id);
+        return view('users.edit',compact('id'));
     }
 
     /**
@@ -83,7 +85,19 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|email|max:255|unique:users',
+            'password'  => 'required|min:3|confirmed'
+        ]);
+
+        $user =User::find($id);
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = bcrypt($request['password']);
+        $user->save();
+
+        return redirect()->route('users.index')->withFlashMessage('User updated');
     }
 
     /**

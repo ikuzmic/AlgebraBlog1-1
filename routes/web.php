@@ -23,9 +23,6 @@ Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 // prikaži sve usere
 Route::get('/users', 'UsersController@index')->name('users.index');
 
-// prikaži jednog usera
-Route::get('/users/{user}', 'UsersController@show')->name('users.show');
-
 // prikaži formu za kreiranje usera
 Route::get('/users/create', 'UsersController@create')->name('users.create');
 
@@ -41,6 +38,8 @@ Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 // obriši usera
 Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
 
+// prikaži jednog usera
+Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 
 Auth::routes();
 
