@@ -2,12 +2,6 @@
 
 @section('content')
 
-    @if(session()->has('flash_message'))
-    <div class="alert alert-success alert-dismissible">
-        {{ session()->get('flash_message') }}
-    </div>
-    @endif
-
     <div class="mb-4">
         <a href="{{ route('users.create') }}" class="btn btn-primary">Dodaj novog korisnika</a>
     </div>
