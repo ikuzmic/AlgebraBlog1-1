@@ -7,10 +7,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    //protected $fillable = ['title','body','user_id','slug'];
-    protected $guarded =['id'];
+   // protected $fillable = ['title', 'body', 'user_id', 'slug'];
+    protected $guarded = ['id'];
 
-    public function getRoutKeyName()
+    public function getRouteKeyName()
     {
         return 'slug';
     }

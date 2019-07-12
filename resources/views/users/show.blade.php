@@ -21,7 +21,6 @@
         </tbody>
     </table>
 
-                <a href="{{route('users.index')}}" class="btn btn-warning">Natrag</a>
-
-
+    <a href="{{ route('users.index') }}" class="btn btn-primary">Natrag</a>
+    
 @endsection

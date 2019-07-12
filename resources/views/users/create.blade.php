@@ -59,8 +59,8 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
-                    <a href="{{route('users.index')}}" class="btn btn-warning">Natrag</a>
-                        <button type="submit" class="btn btn-success float-right" >Dodaj</button>
+                        <a href="{{ route('users.index') }}" class="btn btn-primary">Natrag</a>
+                        <button type="submit" class="btn btn-success float-right">Dodaj</button>
                     </div>
                 </div>
             </form>

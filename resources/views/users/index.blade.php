@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="mb-4">
         <a href="{{ route('users.create') }}" class="btn btn-primary">Dodaj novog korisnika</a>
     </div>

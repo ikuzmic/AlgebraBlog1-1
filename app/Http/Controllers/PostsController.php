@@ -22,23 +22,25 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    public function create()
-    {
+    public function create(){
+
         return view('posts.create');
     }
 
-    public function store()
-    {
+    public function store(){
+
         request()->validate([
-            'title'=>'required|min:3|max:255',
-            'body'=>'required|min:3|max:65535'
+            'title' => 'required|min:3|max:255',
+            'body'  => 'required|min:3|max:65535'
         ]);
 
-        $post = Post::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'user_id'=>auth()->id()
+        Post::create([
+            'title'  => request('title'),
+            'body'    => request('body'),
+            'user_id' => auth()->id()
         ]);
-        return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspjesno');
+
+        return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspješno');
     }
+
 }

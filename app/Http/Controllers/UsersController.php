@@ -48,8 +48,7 @@ class UsersController extends Controller
         $user->email = $request['email'];
         $user->password = bcrypt($request['password']);
         $user->save();
-
-        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name je uspjesno kreiran");
+        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name je uspješno kreiran.");
     }
 
     /**
@@ -58,9 +57,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user =User::find($id);
+       // $user = User::find($id);
         return view('users.show',compact('user'));
     }
 
@@ -72,8 +71,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user=User::find($id);
-        return view('users.edit',compact('user'));
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -95,13 +94,12 @@ class UsersController extends Controller
         $user =User::find($id);
         $user->name = $request['name'];
         $user->email = $request['email'];
-        if($request['password'])
-        {
+        if ($request['password']) {
             $user->password = bcrypt($request['password']);
-        }
+        }        
         $user->save();
 
-        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name  uspjesno je azuriran");
+        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name uspješno je ažuriran.");
     }
 
     /**
@@ -115,6 +113,6 @@ class UsersController extends Controller
         //$user = User::find($id);
         $user->delete();
 
-        return redirect()->route('users.index')->withFlashMessage("User $user->name deleted successfully");
+        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name obrisan je uspješno.");
     }
 }

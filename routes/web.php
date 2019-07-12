@@ -18,10 +18,9 @@ Route::get('/posts/create', 'PostsController@create')->name('posts.create');
 
 Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 
-Route::post('/posts','PostsController@store')->name('posts.store');
+Route::post('/posts', 'PostsController@store')->name('posts.store');
 
-
-
+Route::get('/posts/{post}/edit', 'PostsController@edit')->name('posts.edit');
 
 
 /************** USERS ****************/
