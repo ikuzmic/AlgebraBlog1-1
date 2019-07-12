@@ -17,8 +17,11 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->created_at }}</td>
-
             </tr>
         </tbody>
     </table>
+
+                <a href="{{route('users.index')}}" class="btn btn-warning">Natrag</a>
+
+
 @endsection

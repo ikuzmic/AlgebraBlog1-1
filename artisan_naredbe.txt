@@ -5,3 +5,4 @@ php artisan make:auth
 php artisan make:controller PostsController
 php artisan make:model Post
 php artisan make:controller UsersController -r
+php artisan make:migration update_posts_table --table=posts

@@ -12,11 +12,16 @@
 */
 
 /************** POSTS ****************/
-Route::get('/', 'PostsController@index')->name('posts');
-
-Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');
+Route::get('/posts', 'PostsController@index')->name('posts.index');
 
 Route::get('/posts/create', 'PostsController@create')->name('posts.create');
+
+Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
+
+Route::post('/posts','PostsController@store')->name('posts.store');
+
+
+
 
 
 /************** USERS ****************/

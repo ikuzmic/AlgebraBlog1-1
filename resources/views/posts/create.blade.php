@@ -1,0 +1,35 @@
+@extends('layouts.master')
+
+@section('content')
+
+    <div>
+        <div>
+            <h3>Kreiraj novu objavu</h3>
+        </div>
+
+        <hr>
+
+        <div>
+        <form action ="{{route('posts.store')}}" method="POST">
+            @csrf
+                    <div class="form-group">
+                      <label for="email">Naslov</label>
+                      <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="body">Objava</label>
+                      <textarea name="body" id="body" class="form-control" cols=80 rows=10>{{old('body')}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                            <a href="{{route('posts.index')}}" class="btn btn-primary">Natrag</a>
+                            <button type="submit" class="btn btn-success float-right">Objavi</button>
+                    </div>
+                   
+                  </form> 
+        </div>
+
+    </div>
+
+@endsection

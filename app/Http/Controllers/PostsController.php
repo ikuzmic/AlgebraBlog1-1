@@ -12,15 +12,33 @@ class PostsController extends Controller
     {
         // $posts = DB::table('posts')->get();
 
-        $posts = Post::all();
+        $posts = Post::latest()->get();
 
         return view('posts.index', compact('posts'));
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
-
         return view('posts.show', compact('post'));
+    }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store()
+    {
+        request()->validate([
+            'title'=>'required|min:3|max:255',
+            'body'=>'required|min:3|max:65535'
+        ]);
+
+        $post = Post::create([
+            'title' => request('title'),
+            'body' => request('body'),
+            'user_id'=>auth()->id()
+        ]);
+        return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspjesno');
     }
 }

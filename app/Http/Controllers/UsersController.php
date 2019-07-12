@@ -49,7 +49,7 @@ class UsersController extends Controller
         $user->password = bcrypt($request['password']);
         $user->save();
 
-        return redirect()->route('users.index')->withFlashMessage('User created successfully');
+        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name je uspjesno kreiran");
     }
 
     /**
@@ -72,8 +72,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $id=User::find($id);
-        return view('users.edit',compact('id'));
+        $user=User::find($id);
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -85,19 +85,23 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request);
         $request->validate([
             'name'      => 'required|string|max:255',
-            'email'     => 'required|email|max:255|unique:users',
-            'password'  => 'required|min:3|confirmed'
+            'email'     => 'required|email|max:255|unique:users,email,'.$id,
+            'password'  => 'nullable|min:3'
         ]);
 
         $user =User::find($id);
         $user->name = $request['name'];
         $user->email = $request['email'];
-        $user->password = bcrypt($request['password']);
+        if($request['password'])
+        {
+            $user->password = bcrypt($request['password']);
+        }
         $user->save();
 
-        return redirect()->route('users.index')->withFlashMessage('User updated');
+        return redirect()->route('users.index')->withFlashMessage("Korisnik $user->name  uspjesno je azuriran");
     }
 
     /**
