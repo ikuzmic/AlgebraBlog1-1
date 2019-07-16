@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@index')->name('home');
+
 /************** POSTS ****************/
 Route::get('/posts', 'PostsController@index')->name('posts.index');
 
@@ -49,6 +51,7 @@ Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy')
 // prikaži jednog usera
 Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 
-Auth::routes();
+/************** COMMENTS ****************/
+Route::post('/posts/{post}/comments', 'CommentController@store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();

@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // dohvati sve postove od usera
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
+    // $user->comments
+    // dohvati sve komentare od usera
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

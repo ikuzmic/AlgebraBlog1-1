@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdatePostsTable extends Migration
+class AddUserIdToComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class UpdatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('body');
-            $table->integer('views')->nullable()->after('slug');
-            $table->integer('user_id')->after('views');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->integer('user_id')->after('post_id');
         });
     }
 
@@ -27,10 +25,8 @@ class UpdatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->dropColumn('user_id');
-            $table->dropColumn('views');
-            $table->dropColumn('slug');
         });
     }
 }

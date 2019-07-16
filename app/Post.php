@@ -30,4 +30,14 @@ class Post extends Model
             ]
         ];
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');//https://laravel.com/docs/5.8/eloquent-relationships#one-to-many
+    }
+
+    // $post->comments
+    // dohvati sve komentare za post
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

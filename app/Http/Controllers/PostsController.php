@@ -8,6 +8,12 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     public function index()
     {
         // $posts = DB::table('posts')->get();
@@ -43,14 +49,6 @@ class PostsController extends Controller
         return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspješno');
     }
 
-    public function destroy($id)
-    {                        
-        $post = Post::find($id);
-        $post->delete();
-
-        return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
-    }
-
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
@@ -71,6 +69,14 @@ class PostsController extends Controller
         $post->save();
 
         return redirect()->route('posts.index')->withFlashMessage("Objava uspješno ažurirana.");
+    }
+
+    public function destroy($id)
+    {                        
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
     }
 
 }
