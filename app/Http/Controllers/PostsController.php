@@ -61,12 +61,13 @@ class PostsController extends Controller
         //dd($request);
         request()->validate([
             'title' => 'required|min:3|max:255',
-            'body'  => 'required|min:3|max:65535'
+            'body'  => 'required|min:3|max:65535',
         ]);
 
         $post =Post::find($id);
         $post->title = $request['title'];
-        $post->body = $request['body'];       
+        $post->body = $request['body']; 
+        $post->slug = null;
         $post->save();
 
         return redirect()->route('posts.index')->withFlashMessage("Objava uspješno ažurirana.");
