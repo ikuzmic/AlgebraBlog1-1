@@ -43,4 +43,33 @@ class PostsController extends Controller
         return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspješno');
     }
 
+    public function destroy($id)
+    {                        
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        //dd($request);
+        request()->validate([
+            'title' => 'required|min:3|max:255',
+            'body'  => 'required|min:3|max:65535'
+        ]);
+
+        $post =Post::find($id);
+        $post->title = $request['title'];
+        $post->body = $request['body'];       
+        $post->save();
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava uspješno ažurirana.");
+    }
+
 }

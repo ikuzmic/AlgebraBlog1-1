@@ -15,7 +15,7 @@
         </a>
         <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} <a href="#">Mark</a></p>
         <section class="blog-body">
-            {{ $post->body }}
+            {!! $post->body !!}
         </section>
     </div>
     @endforeach
