@@ -31,6 +31,8 @@ class Post extends Model
         ];
     }
 
+    // $post->user
+    // dohvati usera koji je kreirao post
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');//https://laravel.com/docs/5.8/eloquent-relationships#one-to-many
     }
@@ -39,5 +41,10 @@ class Post extends Model
     // dohvati sve komentare za post
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+    public static function popular()
+    {
+        return self::orderBy('views', 'desc')->limit(5)->get();
     }
 }

@@ -24,12 +24,14 @@ Route::post('/posts', 'PostsController@store')->name('posts.store');
 
 Route::get('/posts/{post}/edit', 'PostsController@edit')->name('posts.edit');
 
-Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
+Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy')->middleware('verified');
 
 Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
 
+//Roure::resource('posts', 'PostsController');
 
-/************** USERS ****************/
+
+/************** USERS ****************
 // prikaži sve usere
 Route::get('/users', 'UsersController@index')->name('users.index');
 
@@ -50,8 +52,12 @@ Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy')
 
 // prikaži jednog usera
 Route::get('/users/{user}', 'UsersController@show')->name('users.show');
+*/
+
+// zamjena za users rute zakomentirane iznad
+Route::resource('users', 'UsersController')->middleware('verified');
 
 /************** COMMENTS ****************/
 Route::post('/posts/{post}/comments', 'CommentController@store');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
