@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Mail\PostDeleted;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -40,36 +41,45 @@ class PostsController extends Controller
 
     public function create(){
 
-        return view('posts.create');
+        $tags = Tag::all();
+
+        return view('posts.create', compact('tags'));
     }
 
     public function store(){
 
+
         request()->validate([
             'title' => 'required|min:3|max:255',
-            'body'  => 'required|min:3|max:65535'
+            'body'  => 'required|min:3|max:65535',
+            'tags'  => 'required'
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title'  => request('title'),
             'body'    => request('body'),
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspješno');
+        $tags = request('tags');
+        $post->tags()->attach($tags);
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" dodana uspješno");
     }
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $tags = Tag::all();
+
+        return view('posts.edit', compact('post', 'tags'));
     }
 
     public function update(Request $request, $id)
     {
-        //dd($request);
         request()->validate([
             'title' => 'required|min:3|max:255',
             'body'  => 'required|min:3|max:65535',
+            'tags'  => 'required'
         ]);
 
         $post =Post::find($id);
@@ -78,7 +88,9 @@ class PostsController extends Controller
         $post->slug = null;
         $post->save();
 
-        return redirect()->route('posts.index')->withFlashMessage("Objava uspješno ažurirana.");
+        $post->tags()->sync(request('tags'));
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" uspješno ažurirana.");
     }
 
     public function destroy($id)
@@ -86,7 +98,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        \Mail::to($post->user)->send(new PostDeleted($post));
+    //   \Mail::to($post->user)->send(new PostDeleted($post));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
     }

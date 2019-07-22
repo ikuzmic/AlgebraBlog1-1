@@ -43,6 +43,12 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    // $post->tags
+    // dohvati sve tagove koje ima post
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
     public static function popular()
     {
         return self::orderBy('views', 'desc')->limit(5)->get();

@@ -60,4 +60,9 @@ Route::resource('users', 'UsersController')->middleware('verified');
 /************** COMMENTS ****************/
 Route::post('/posts/{post}/comments', 'CommentController@store');
 
+/************** TAGS ****************/
+Route::get('/posts/tags/{tag}', 'TagController@index')->name('tags.index');
+
+Route::post('/tags', 'TagController@store')->name('tags.store');
+
 Auth::routes(['verify' => true]);
