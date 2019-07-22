@@ -34,6 +34,8 @@
 
       <div class="row">
 
+      
+
         <div class="col-sm-8 blog-main">
 
           @include('layouts.flash_messages')

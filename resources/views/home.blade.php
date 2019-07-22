@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Ovo je početna stranica!
                 </div>
             </div>
         </div>

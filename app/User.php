@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // dohvati sve postove od usera
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
+    // $user->comments
+    // dohvati sve komentare od usera
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }
