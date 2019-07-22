@@ -74,7 +74,7 @@ class PostsController extends Controller
 
         $post =Post::find($id);
         $post->title = $request['title'];
-        $post->body = $request['body']; 
+        $post->body = $request['body'];
         $post->slug = null;
         $post->save();
 
@@ -86,7 +86,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        \Mail::to($post->user)->queue(new PostDeleted($post));
+        \Mail::to($post->user)->send(new PostDeleted($post));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
     }
