@@ -4,6 +4,15 @@
         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
         <a class="nav-link {{ request()->is('posts*') ? 'active' : '' }}" href="/posts">Objave</a>
         <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">Korisnici</a>
+        <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="cats" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Kategorije
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{{ route('cats.index','Programiranje') }}">Programiranje</a>
+                  <a class="dropdown-item" href="{{ route('cats.index','Građa') }}">Građa</a>
+                </div>
+              </div>
         <a class="nav-link" href="#">Press</a>
         <a class="nav-link" href="#">New hires</a>
         <a class="nav-link" href="#">About</a>

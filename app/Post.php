@@ -49,6 +49,10 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function cats(){
+        return $this->belongsTo(Cat::class, 'cat_id', 'id');
+    }
+
     public static function popular()
     {
         return self::orderBy('views', 'desc')->limit(5)->get();

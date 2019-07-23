@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Mail\PostDeleted;
 use App\Tag;
+use App\Cat;
 
 class PostsController extends Controller
 {
@@ -42,8 +43,8 @@ class PostsController extends Controller
     public function create(){
 
         $tags = Tag::all();
-
-        return view('posts.create', compact('tags'));
+        $cats = Cat::all();
+        return view('posts.create', compact('tags','cats'));
     }
 
     public function store(){
@@ -52,7 +53,8 @@ class PostsController extends Controller
         request()->validate([
             'title' => 'required|min:3|max:255',
             'body'  => 'required|min:3|max:65535',
-            'tags'  => 'required'
+            'tags'  => 'required',
+            'cats'  => 'required'
         ]);
 
         $post = Post::create([
@@ -62,7 +64,9 @@ class PostsController extends Controller
         ]);
 
         $tags = request('tags');
+        $cats = request('cats');
         $post->tags()->attach($tags);
+        $post->cats()->attach($cats);
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" dodana uspješno");
     }
@@ -70,8 +74,8 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         $tags = Tag::all();
-
-        return view('posts.edit', compact('post', 'tags'));
+        $cats = Cat::all();
+        return view('posts.edit', compact('post', 'tags','cats'));
     }
 
     public function update(Request $request, $id)
@@ -79,7 +83,8 @@ class PostsController extends Controller
         request()->validate([
             'title' => 'required|min:3|max:255',
             'body'  => 'required|min:3|max:65535',
-            'tags'  => 'required'
+            'tags'  => 'required',
+            'cats'  => 'required'
         ]);
 
         $post =Post::find($id);
@@ -89,6 +94,7 @@ class PostsController extends Controller
         $post->save();
 
         $post->tags()->sync(request('tags'));
+        $post->cats()->sync(request('cats'));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" uspješno ažurirana.");
     }
