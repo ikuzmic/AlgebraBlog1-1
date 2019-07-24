@@ -4,15 +4,18 @@
         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
         <a class="nav-link {{ request()->is('posts*') ? 'active' : '' }}" href="/posts">Objave</a>
         <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">Korisnici</a>
-        <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="cats" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Kategorije
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="{{ route('cats.index','Programiranje') }}">Programiranje</a>
-                  <a class="dropdown-item" href="{{ route('cats.index','Građa') }}">Građa</a>
+        <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    Kategorije <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('cats.index', 'Programiranje') }}">Programiranje
+                    </a>
+                    <a href="{{ route('cats.index', 'Građa') }}" class="dropdown-item">Građa</a>
+                    </form>
                 </div>
-              </div>
+            </li>
         <a class="nav-link" href="#">Press</a>
         <a class="nav-link" href="#">New hires</a>
         <a class="nav-link" href="#">About</a>
