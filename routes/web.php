@@ -55,7 +55,7 @@ Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 */
 
 // zamjena za users rute zakomentirane iznad
-Route::resource('users', 'UsersController')->middleware('verified');
+Route::resource('users', 'UsersController')->middleware('roles:admin');
 
 /************** COMMENTS ****************/
 Route::post('/posts/{post}/comments', 'CommentController@store');

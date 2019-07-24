@@ -42,6 +42,9 @@ class PostsController extends Controller
 
     public function create(){
 
+        // kreirati post mogu samo admin i operator
+        request()->user()->authorizeRoles(['admin','operator']);
+
         $tags = Tag::all();
         $cats = Cat::all();
         return view('posts.create', compact('tags', 'cats'));

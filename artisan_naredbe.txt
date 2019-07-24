@@ -17,3 +17,6 @@ composer require guzzlehttp/guzzle
 php artisan make:mail PostDeleted --markdown=emails.post-deleted
 php artisan make:model Tag -a
 php artisan migrate
+php artisan make:model Cat -a
+php artisan make:model Role -a
+php artisan make:middleware CheckRole
