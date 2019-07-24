@@ -41,6 +41,13 @@
                             <label class="custom-control-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
                     @endforeach
+                        <br/>
+                    @foreach ($cats as $cat)
+                    <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="cat-{{ $cat->id }}" name="cats" value="{{ $cat->id }}">
+                            <label class="custom-control-label" for="cat-{{ $cat->id }}">{{ $cat->name }}</label>
+                        </div>
+                    @endforeach
                 </div>
 
                 <div class="form-group">

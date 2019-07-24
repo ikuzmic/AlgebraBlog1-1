@@ -40,6 +40,17 @@
                     @endforeach
                 </div>
 
+                <div class="form-group mb-4">
+                    <h6>Kategorija</h6>
+                    @foreach ($cats as $cat)
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="cat-{{ $cat->id }}" name="cats" value="{{ $cat->id }}"
+                            {{ $cat->posts->contains($post->id) ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="cat-{{ $cat->id }}">{{ $cat->name }}</label>
+                        </div>
+                    @endforeach
+                </div>
+
                 <div class="form-group">
                     <a href="{{ route('posts.index') }}" class="btn btn-primary">Natrag</a>
                     <button type="submit" class="btn btn-success float-right">Uredi</button>
