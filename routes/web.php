@@ -65,6 +65,9 @@ Route::get('/posts/tags/{tag}', 'TagController@index')->name('tags.index');
 
 Route::post('/tags', 'TagController@store')->name('tags.store');
 
+/************** CATEGORIES ****************/
 Route::get('/posts/cats/{cat}', 'CatController@index')->name('cats.index');
+
+Route::post('/cats', 'CatController@store')->name('cats.store');
 
 Auth::routes(['verify' => true]);

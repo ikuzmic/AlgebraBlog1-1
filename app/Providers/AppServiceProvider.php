@@ -31,5 +31,9 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(compact('tags', 'popularPosts'));
         });
+
+        view()->composer('layouts.nav', function($view){
+            $view->with('cats', \App\Cat::all());
+        });
     }
 }

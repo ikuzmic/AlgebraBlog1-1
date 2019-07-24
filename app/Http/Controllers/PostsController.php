@@ -44,11 +44,10 @@ class PostsController extends Controller
 
         $tags = Tag::all();
         $cats = Cat::all();
-        return view('posts.create', compact('tags','cats'));
+        return view('posts.create', compact('tags', 'cats'));
     }
 
     public function store(){
-
 
         request()->validate([
             'title' => 'required|min:3|max:255',
@@ -58,15 +57,14 @@ class PostsController extends Controller
         ]);
 
         $post = Post::create([
-            'title'  => request('title'),
+            'title'   => request('title'),
             'body'    => request('body'),
+            'cat_id'  => request('cats'),
             'user_id' => auth()->id()
         ]);
 
         $tags = request('tags');
-        $cats = request('cats');
         $post->tags()->attach($tags);
-        $post->cats()->attach($cats);
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" dodana uspješno");
     }
@@ -91,10 +89,10 @@ class PostsController extends Controller
         $post->title = $request['title'];
         $post->body = $request['body'];
         $post->slug = null;
+        $post->cat_id = $request['cats'];
         $post->save();
 
         $post->tags()->sync(request('tags'));
-        $post->cats()->sync(request('cats'));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" uspješno ažurirana.");
     }
