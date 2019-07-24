@@ -6,6 +6,21 @@
         <h2 class="blog-post-title">{{ $post->title }}</h2>
         
         <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} autora <a href="#">{{ $post->user->name }}</a></p>
+
+        <section class="mb-3">
+            <h6 class="d-inline">Kategorija</h6>
+            <a href="{{ route('cats.index',$post->cats['name']) }}" class="badge badge-primary">{{ $post->cats['name'] }}</a>
+        </section>
+
+        @if (count($post->tags))
+        <section class="mb-3">
+            <h6 class="d-inline">Tags:</h6>
+            @foreach ($post->tags as $tag)
+                <a href="{{ route('tags.index', $tag) }}" class="badge badge-primary">{{ $tag->name }}</a>
+            @endforeach
+        </section>
+        @endif
+
         <section class="blog-body">
             {!! $post->body !!}
         </section>

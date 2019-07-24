@@ -15,3 +15,5 @@ php artisan make:mail Welcome --markdown=emails.welcome
 php artisan config:cache
 composer require guzzlehttp/guzzle
 php artisan make:mail PostDeleted --markdown=emails.post-deleted
+php artisan make:model Tag -a
+php artisan migrate

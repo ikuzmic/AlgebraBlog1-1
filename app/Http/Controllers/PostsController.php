@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Mail\PostDeleted;
+use App\Tag;
+use App\Cat;
 
 class PostsController extends Controller
 {
@@ -40,45 +42,61 @@ class PostsController extends Controller
 
     public function create(){
 
-        return view('posts.create');
+        $tags = Tag::all();
+        $cats = Cat::all();
+        return view('posts.create', compact('tags','cats'));
     }
 
     public function store(){
 
+
         request()->validate([
             'title' => 'required|min:3|max:255',
-            'body'  => 'required|min:3|max:65535'
+            'body'  => 'required|min:3|max:65535',
+            'tags'  => 'required',
+            'cats'  => 'required'
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title'  => request('title'),
             'body'    => request('body'),
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->route('posts.index')->withFlashMessage('Objava dodana uspješno');
+        $tags = request('tags');
+        $cats = request('cats');
+        $post->tags()->attach($tags);
+        $post->cats()->attach($cats);
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" dodana uspješno");
     }
 
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $tags = Tag::all();
+        $cats = Cat::all();
+        return view('posts.edit', compact('post', 'tags','cats'));
     }
 
     public function update(Request $request, $id)
     {
-        //dd($request);
         request()->validate([
             'title' => 'required|min:3|max:255',
             'body'  => 'required|min:3|max:65535',
+            'tags'  => 'required',
+            'cats'  => 'required'
         ]);
 
         $post =Post::find($id);
         $post->title = $request['title'];
-        $post->body = $request['body']; 
+        $post->body = $request['body'];
         $post->slug = null;
         $post->save();
 
-        return redirect()->route('posts.index')->withFlashMessage("Objava uspješno ažurirana.");
+        $post->tags()->sync(request('tags'));
+        $post->cats()->sync(request('cats'));
+
+        return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" uspješno ažurirana.");
     }
 
     public function destroy($id)
@@ -86,7 +104,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        \Mail::to($post->user)->queue(new PostDeleted($post));
+    //   \Mail::to($post->user)->send(new PostDeleted($post));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
     }

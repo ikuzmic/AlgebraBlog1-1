@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Tag;
+use App\Post;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.sidebar', function($view){
-            $view->with('popularPosts', \App\Post::popular());
+            $tags = Tag::has('posts')->pluck('name');
+            $popularPosts = Post::popular();
+
+            $view->with(compact('tags', 'popularPosts'));
         });
     }
 }

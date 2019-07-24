@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'admin@algebrablog.hr'),
-        'name' => env('MAIL_FROM_NAME', 'Aleksandar Dobrinić'),
+        'name' => env('MAIL_FROM_NAME', 'Roko Jelinić'),
     ],
 
     /*
