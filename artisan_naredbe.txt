@@ -20,3 +20,8 @@ php artisan migrate
 php artisan make:model Cat -a
 php artisan make:model Role -a
 php artisan make:middleware CheckRole
+php artisan make:seeder UserTableSeeder
+php artisan make:seeder RoleTableSeeder
+php artisan migrate:fresh
+php artisan db:seed
+php artisan make:factory PostFactory --model=Post

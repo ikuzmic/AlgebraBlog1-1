@@ -20,6 +20,7 @@
             <li><a href="#">April 2013</a></li>
         </ol>
     </div>
+    @if (count($popularPosts))
     <div class="sidebar-module">
         <h4>Naj popularniji postovi</h4>
         <ol class="list-unstyled">
@@ -30,6 +31,8 @@
             @endforeach
         </ol>
     </div>
+    @endif
+    @if (count($tags))
     <div class="sidebar-module">
         <h4>Tags</h4>
         <ol class="list-unstyled">
@@ -40,6 +43,6 @@
             @endforeach
         </ol>
     </div>
-
+    @endif
    
 </div><!-- /.blog-sidebar -->
