@@ -7,6 +7,7 @@ use App\Post;
 use App\Mail\PostDeleted;
 use App\Tag;
 use App\Cat;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -108,6 +109,13 @@ class PostsController extends Controller
     //   \Mail::to($post->user)->send(new PostDeleted($post));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
+    }
+
+    public function showPostsForUser(User $user){
+
+        $posts = $user->posts;
+
+        return view('posts.index', compact('posts'));
     }
 
 }

@@ -28,6 +28,8 @@ Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy')
 
 Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
 
+Route::get('user/{user}/posts', 'PostsController@showPostsForUser')->name('user.posts.show');
+
 //Roure::resource('posts', 'PostsController');
 
 

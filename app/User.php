@@ -37,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    // $user->posts
     // dohvati sve postove od usera
     public function posts(){
         return $this->hasMany(Post::class);
