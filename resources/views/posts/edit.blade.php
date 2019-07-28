@@ -8,7 +8,7 @@
 
     <div>
         <div>
-            <h3>Kreiraj novu objavu</h3>
+            <h3>Uredi objavu</h3>
         </div>
 
         <hr>
@@ -31,6 +31,12 @@
 
                 <div class="form-group mb-4">
                     <h6>Tags</h6>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-primary float-right" data-toggle="modal" data-target="#addTag">
+                        Dodaj Oznaku
+                    </button>
+
                     @foreach ($tags as $tag)
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}"
@@ -60,6 +66,9 @@
 
             </form>
         </div>
+
+        @include('tags.modal')
+        @include('cats.modal')
 
     </div>
 

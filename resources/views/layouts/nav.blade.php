@@ -3,22 +3,28 @@
     <nav class="nav blog-nav navbar-expand-md navbar-dark">
         <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
         <a class="nav-link {{ request()->is('posts*') ? 'active' : '' }}" href="/posts">Objave</a>
-        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">Korisnici</a>
-        <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    Kategorije <span class="caret"></span>
-                </a>
 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('cats.index', 'Programiranje') }}">Programiranje
+        @role('admin')
+        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/users">Korisnici</a>
+        @endrole
+        
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Kategorije <span class="caret"></span>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                @foreach ($cats as $cat)
+                    <a class="dropdown-item" href="{{ route('cats.index', $cat->name) }}">
+                        {{ $cat->name }}
                     </a>
-                    <a href="{{ route('cats.index', 'Građa') }}" class="dropdown-item">Građa</a>
-                    </form>
-                </div>
-            </li>
-        <a class="nav-link" href="#">Press</a>
-        <a class="nav-link" href="#">New hires</a>
-        <a class="nav-link" href="#">About</a>
+                @endforeach
+                </form>
+            </div>
+        </li>
+        @auth
+            <a class="nav-link" href="{{ route('user.posts.show', auth()->id() )}}">My Posts</a>
+        @endauth
         
         <ul class="navbar-nav ml-auto">
         @guest

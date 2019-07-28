@@ -28,6 +28,8 @@ Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy')
 
 Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
 
+Route::get('user/{user}/posts', 'PostsController@showPostsForUser')->name('user.posts.show');
+
 //Roure::resource('posts', 'PostsController');
 
 
@@ -55,7 +57,7 @@ Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 */
 
 // zamjena za users rute zakomentirane iznad
-Route::resource('users', 'UsersController')->middleware('verified');
+Route::resource('users', 'UsersController')->middleware('roles:admin');
 
 /************** COMMENTS ****************/
 Route::post('/posts/{post}/comments', 'CommentController@store');
@@ -65,6 +67,9 @@ Route::get('/posts/tags/{tag}', 'TagController@index')->name('tags.index');
 
 Route::post('/tags', 'TagController@store')->name('tags.store');
 
+/************** CATEGORIES ****************/
 Route::get('/posts/cats/{cat}', 'CatController@index')->name('cats.index');
+
+Route::post('/cats', 'CatController@store')->name('cats.store');
 
 Auth::routes(['verify' => true]);

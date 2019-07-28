@@ -15,7 +15,7 @@
         <a href="{{ route('posts.show', $post->slug) }}">
             <h2 class="blog-post-title">{{ $post->title }}</h2>
         </a>
-    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} autora <a href="#">{{ $post->user->name }}</a></p>
+    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} autora <a href=" {{ route('user.posts.show', $post->user->id )}} ">{{ $post->user->name }}</a></p>
         <section class="blog-body">
             {!! $post->body !!}
         </section>

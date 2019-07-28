@@ -41,15 +41,24 @@
                             <label class="custom-control-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
                         </div>
                     @endforeach
-                        <br/>
+                </div>
+
+                <div class="form-group mb-4">
+                    <h6>Kategorije</h6>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-warning float-right" data-toggle="modal" data-target="#addCat">
+                        Dodaj Kategoriju
+                    </button>
                     @foreach ($cats as $cat)
-                    <div class="custom-control custom-radio custom-control-inline">
+                        <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="cat-{{ $cat->id }}" name="cats" value="{{ $cat->id }}">
                             <label class="custom-control-label" for="cat-{{ $cat->id }}">{{ $cat->name }}</label>
                         </div>
                     @endforeach
+                
                 </div>
-
+                
                 <div class="form-group">
                     <a href="{{ route('posts.index') }}" class="btn btn-primary">Natrag</a>
                     <button type="submit" class="btn btn-success float-right">Objavi</button>
@@ -60,34 +69,8 @@
             </form>
         </div>
 
-      <!-- Modal -->
-      <div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Dodaj novu oznaku</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('tags.store') }}" method="post" id="addTagForm">
-                    @csrf
-                    
-                    <div class="form-group">
-                        <label for="name">Naziv</label>
-                        <input type="text" id="name" name="name" class="form-control">
-                    </div>
-                
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-              <button type="button" class="btn btn-primary" onclick="$('#addTagForm').submit()">Dodaj</button>
-            </div>
-          </div>
-        </div>
-      </div>
+        @include('tags.modal')
+        @include('cats.modal')
 
     </div>
 

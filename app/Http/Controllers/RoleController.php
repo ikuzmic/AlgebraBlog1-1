@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
+use App\Role;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class RoleController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('roles:admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Tag $tag)
+    public function index()
     {
-        //svi postovi koji su označeni tagom $tag
-        $posts = $tag->posts;
-
-        return view('posts.index', compact('posts'));
+        //
     }
 
     /**
@@ -36,22 +37,18 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        $tag = request()->validate(['name' => 'required|min:3|max:255']);
-
-        Tag::create($tag);
-
-        return redirect()->back()->withFlashMessage("Oznaka \"$tag[name]\" dodana je uspješno");
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show(Role $role)
     {
         //
     }
@@ -59,10 +56,10 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit(Role $role)
     {
         //
     }
@@ -71,10 +68,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -82,10 +79,10 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag  $tag
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Role $role)
     {
         //
     }

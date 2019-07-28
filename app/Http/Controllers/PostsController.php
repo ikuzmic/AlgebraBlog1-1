@@ -7,6 +7,7 @@ use App\Post;
 use App\Mail\PostDeleted;
 use App\Tag;
 use App\Cat;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -42,13 +43,15 @@ class PostsController extends Controller
 
     public function create(){
 
+        // kreirati post mogu samo admin i operator
+        request()->user()->authorizeRoles(['admin','operator']);
+
         $tags = Tag::all();
         $cats = Cat::all();
-        return view('posts.create', compact('tags','cats'));
+        return view('posts.create', compact('tags', 'cats'));
     }
 
     public function store(){
-
 
         request()->validate([
             'title' => 'required|min:3|max:255',
@@ -58,15 +61,14 @@ class PostsController extends Controller
         ]);
 
         $post = Post::create([
-            'title'  => request('title'),
+            'title'   => request('title'),
             'body'    => request('body'),
+            'cat_id'  => request('cats'),
             'user_id' => auth()->id()
         ]);
 
         $tags = request('tags');
-        $cats = request('cats');
         $post->tags()->attach($tags);
-        $post->cats()->attach($cats);
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" dodana uspješno");
     }
@@ -91,10 +93,10 @@ class PostsController extends Controller
         $post->title = $request['title'];
         $post->body = $request['body'];
         $post->slug = null;
+        $post->cat_id = $request['cats'];
         $post->save();
 
         $post->tags()->sync(request('tags'));
-        $post->cats()->sync(request('cats'));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava \"$post->title\" uspješno ažurirana.");
     }
@@ -107,6 +109,13 @@ class PostsController extends Controller
     //   \Mail::to($post->user)->send(new PostDeleted($post));
 
         return redirect()->route('posts.index')->withFlashMessage("Objava je uspješno obrisana.");
+    }
+
+    public function showPostsForUser(User $user){
+
+        $posts = $user->posts;
+
+        return view('posts.index', compact('posts'));
     }
 
 }

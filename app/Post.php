@@ -49,8 +49,10 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function cats(){
-        return $this->belongsTo(Cat::class, 'cat_id', 'id');
+    // $post->cat
+    // dohvati kategoriju kojoj pripada post
+    public function cat(){
+        return $this->belongsTo(Cat::class);
     }
 
     public static function popular()

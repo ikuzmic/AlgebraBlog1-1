@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Tag;
 use App\Post;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,17 @@ class AppServiceProvider extends ServiceProvider
             $popularPosts = Post::popular();
 
             $view->with(compact('tags', 'popularPosts'));
+        });
+
+        view()->composer('layouts.nav', function($view){
+            $view->with('cats', \App\Cat::all());
+        });
+
+        Blade::directive('role', function($role){
+            return "<?php if( auth()->check()  && auth()->user()->hasRole($role) ) { ?>";
+        });
+        Blade::directive('endrole', function(){
+            return "<?php } ?>";
         });
     }
 }

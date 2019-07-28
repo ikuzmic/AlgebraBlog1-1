@@ -35,9 +35,13 @@ class CatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $cat = request()->validate(['name' => 'required|min:3|max:255']);
+
+        Cat::create($cat);
+
+        return redirect()->back()->withFlashMessage("Kategorija \"$cat[name]\" dodana je uspješno");
     }
 
     /**
